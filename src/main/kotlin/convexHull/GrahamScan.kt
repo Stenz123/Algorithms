@@ -1,5 +1,0 @@
-package convexHull
-
-class GrahamScan {
-
-}
