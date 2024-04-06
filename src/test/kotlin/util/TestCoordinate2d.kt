@@ -1,6 +1,6 @@
 package util
 
-import dev.stenz.algorithm.util.Coordinate2d
+import dev.stenz.algorithms.util.Coordinate2d
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
