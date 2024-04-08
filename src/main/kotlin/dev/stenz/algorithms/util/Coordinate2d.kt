@@ -1,4 +1,4 @@
-package util
+package dev.stenz.algorithms.util
 
 
 /**
