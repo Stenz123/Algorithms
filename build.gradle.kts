@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
-
 plugins {
     kotlin("jvm") version "1.9.22"
     `java-library`
@@ -11,7 +9,7 @@ plugins {
 }
 
 group = "dev.stenz.algorithms"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1"
 
 repositories {
     mavenCentral()
@@ -37,9 +35,9 @@ kotlin {
 // ------------------------------------
 object Meta {
     val COMPONENT_TYPE = "java" // "java" or "versionCatalog"
-    val GROUP = "dev.stenz.algorithms"
+    val GROUP = "dev.stenz"
     val ARTIFACT_ID = "simple-algorithms"
-    val VERSION = "0.0.1-SNAPSHOT"
+    val VERSION = "0.0.1"
     val PUBLISHING_TYPE = "AUTOMATIC" // USER_MANAGED or AUTOMATIC
     val SHA_ALGORITHMS = listOf("SHA-256", "SHA-512") // sha256 and sha512 are supported but not mandatory. Only sha1 is mandatory but it is supported by default.
     val DESC = "Basic algorithms for competetive programming"
