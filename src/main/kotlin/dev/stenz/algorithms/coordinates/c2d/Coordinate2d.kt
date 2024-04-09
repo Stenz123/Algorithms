@@ -1,20 +1,17 @@
-package dev.stenz.algorithms.util
+package dev.stenz.algorithms.coordinates.c2d
+
+import dev.stenz.algorithms.coordinates.c2d.CoordinateMap2d.Companion.wrapAndFilterBoundaries
 
 
 /**
  * Top y-1 ↑ | Bottom y+1 ↓ | Left x-1 ← | Right x+1 →
  */
-data class Coordinate2d(var x: Int, var y: Int) {
-
-    override fun toString(): String {
-        return "(x:$x|y:$y)"
-    }
+data class Coordinate2d(var x: Int, var y: Int, var map2d: CoordinateMap2d = CoordinateMap2d()) {
 
     fun top() = Coordinate2d(x, y - 1)
     fun bottom() = Coordinate2d(x, y + 1)
     fun left() = Coordinate2d(x - 1, y)
     fun right() = Coordinate2d(x + 1, y)
-
 
     fun topRight() = Coordinate2d(x + 1, y - 1)
     fun bottomLeft() = Coordinate2d(x - 1, y + 1)
@@ -30,9 +27,21 @@ data class Coordinate2d(var x: Int, var y: Int) {
         topRight(),
         bottomLeft(),
         bottomRight()
-    )
+    ).wrapAndFilterBoundaries(map2d)
 
-    fun get4Neighbours(): List<Coordinate2d> = listOf(top(), bottom(), right(), left())
+    fun get4Neighbours(): List<Coordinate2d> = listOf(
+        top(),
+        bottom(),
+        right(),
+        left()
+    ).wrapAndFilterBoundaries(map2d)
+
+    fun wrapAndFilterBoundaries() = map2d.wrapAndFilterBoundaries(this)
+
+    override fun toString(): String {
+        return "(x:$x|y:$y)"
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -50,6 +59,4 @@ data class Coordinate2d(var x: Int, var y: Int) {
         result = 31 * result + y
         return result
     }
-
-
 }
