@@ -42,10 +42,10 @@ class TestCoordinateMap2d {
     fun checkIfIsOutOfBounds() {
         val map = CoordinateMap2d(xRange = 0..5, yRange = -100..-90)
 
-        assertEquals(false, map.checkIfInBounds(Coordinate2d(5, -90)))
-        assertEquals(false, map.checkIfInBounds(Coordinate2d(0, -100)))
-        assertEquals(true, map.checkIfInBounds(Coordinate2d(6, -90)))
-        assertEquals(true, map.checkIfInBounds(Coordinate2d(3, -89)))
+        assertEquals(true, map.checkIfInBounds(Coordinate2d(5, -90)))
+        assertEquals(true, map.checkIfInBounds(Coordinate2d(0, -100)))
+        assertEquals(false, map.checkIfInBounds(Coordinate2d(6, -90)))
+        assertEquals(false, map.checkIfInBounds(Coordinate2d(3, -89)))
     }
 
     @Test
