@@ -1,5 +1,7 @@
 package dev.stenz.algorithms.coordinates.c2d
 
+import dev.stenz.algorithms.util.ConsoleColors
+
 class CoordinateMap2d(
     var xRange: IntRange? = null,
     var yRange: IntRange? = null,
@@ -21,7 +23,7 @@ class CoordinateMap2d(
 
     fun checkIfInBounds(coordinate2d: Coordinate2d): Boolean {
         return !((xRange != null && coordinate2d.x !in xRange!!) ||
-                 (yRange != null && coordinate2d.y !in yRange!!))
+                (yRange != null && coordinate2d.y !in yRange!!))
     }
 
     fun wrapAndFilterBoundaries(coordinate2d: Coordinate2d): Coordinate2d? {
@@ -50,6 +52,29 @@ class CoordinateMap2d(
     }
 
     companion object {
-        fun List<Coordinate2d>.wrapAndFilterBoundaries(map: CoordinateMap2d) = this.mapNotNull { map.wrapAndFilterBoundaries(it) }
+        fun List<Coordinate2d>.wrapAndFilterBoundaries(map: CoordinateMap2d) =
+            this.mapNotNull { map.wrapAndFilterBoundaries(it) }
+
+        fun List<Coordinate2d>.draw(colored: List<Coordinate2d> = listOf()) {
+            val minX = this.minOf(Coordinate2d::x)
+            val maxX = this.maxOf(Coordinate2d::x)
+            val minY = this.minOf(Coordinate2d::y)
+            val maxY = this.maxOf(Coordinate2d::y)
+
+            //for (y in (minY..maxY)) print(y) TODO: Make numbers be printed vertically
+
+            print('┎')
+            repeat((maxX - minX + 1)*2) { print('━') }
+            println()
+            for (y in (minY..maxY)) {
+                print('│')
+                for (x in (minX..maxX)) {
+                    if (colored.contains(Coordinate2d(x,y))) print(ConsoleColors.GREEN+"▅"+ConsoleColors.RESET+"│")
+                    else if (this.contains(Coordinate2d(x, y))) print("▅│")
+                    else print(" │")
+                }
+                println()
+            }
+        }
     }
 }

@@ -1,6 +1,9 @@
 package dev.stenz.algorithms.coordinates.c2d
 
 import dev.stenz.algorithms.coordinates.c2d.CoordinateMap2d.Companion.wrapAndFilterBoundaries
+import kotlin.math.acos
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 
 /**
@@ -58,5 +61,32 @@ data class Coordinate2d(var x: Int, var y: Int, var map2d: CoordinateMap2d = Coo
         var result = x
         result = 31 * result + y
         return result
+    }
+
+    companion object {
+        fun calculateAngle(a: Coordinate2d, b: Coordinate2d, c: Coordinate2d): Double {
+            val ba = doubleArrayOf((a.x - b.x).toDouble(), (a.y - b.y).toDouble()) // vector b to a
+            val bc = doubleArrayOf((c.x - b.x).toDouble(), (c.y - b.y).toDouble()) // vector b to c
+
+            val dotProduct = ba[0] * bc[0] + ba[1] * bc[1]
+            val magnitudeBa = sqrt(ba[0].pow(2) + ba[1].pow(2))
+            val magnitudeBc = sqrt(bc[0].pow(2) + bc[1].pow(2))
+
+            return Math.toDegrees(acos(dotProduct / (magnitudeBa * magnitudeBc)))
+        }
+
+        /*
+        * 0 --> p, q and r are collinear
+        * 1 --> Clockwise
+        * -1 --> Counterclockwise
+        */
+        fun orientation(p1: Coordinate2d, p2: Coordinate2d, p3: Coordinate2d): Int {
+            val slope = (p2.y - p1.y) * (p3.x - p2.x) - (p2.x - p1.x) * (p3.y - p2.y)
+            return when {
+                slope == 0 -> 0 // collinear
+                slope > 0 -> 1 // clockwise
+                else -> -1 // counterclockwise
+            }        }
+
     }
 }
