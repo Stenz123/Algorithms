@@ -1,10 +1,10 @@
-package dev.stenz.algorithms.convexHull
+package dev.stenz.algorithms
 
 import dev.stenz.algorithms.coordinates.c2d.Coordinate2d
 
-object GrahamScan {
+object ConvexHull {
 
-    fun solve(points: List<Coordinate2d>): List<Coordinate2d> {
+    fun grahamScan(points: List<Coordinate2d>): List<Coordinate2d> {
         if (points.isEmpty())return listOf()
 
         //lowest y left

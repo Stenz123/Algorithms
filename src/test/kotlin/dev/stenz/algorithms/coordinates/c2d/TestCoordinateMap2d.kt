@@ -14,8 +14,8 @@ class TestCoordinateMap2d {
             yRange = 1..5
         )
 
-        assertEquals(Coordinate2d(2, 1), map.createCoordinate(11, 1).wrapAndFilterBoundaries())
-        assertEquals(Coordinate2d(2, 5), map.createCoordinate(2, 100).wrapAndFilterBoundaries())
+        assertEquals(Coordinate2d(2, 1), map.newCoordinate(11, 1).wrapAndFilterBoundaries())
+        assertEquals(Coordinate2d(2, 5), map.newCoordinate(2, 100).wrapAndFilterBoundaries())
     }
 
     @Test
@@ -27,15 +27,15 @@ class TestCoordinateMap2d {
             yRange = -15..5
         )
 
-        assertEquals(Coordinate2d(-9, -15), map.createCoordinate(-15, 6).wrapAndFilterBoundaries())
+        assertEquals(Coordinate2d(-9, -15), map.newCoordinate(-15, 6).wrapAndFilterBoundaries())
     }
 
     @Test
     fun checkOutOfBounds() {
         val map = CoordinateMap2d(xRange = 0..10, yRange = 5..20)
 
-        assertEquals(null, map.createCoordinate(10, 0).wrapAndFilterBoundaries())
-        assertEquals(Coordinate2d(0, 5), map.createCoordinate(0, 5).wrapAndFilterBoundaries())
+        assertEquals(null, map.newCoordinate(10, 0).wrapAndFilterBoundaries())
+        assertEquals(Coordinate2d(0, 5), map.newCoordinate(0, 5).wrapAndFilterBoundaries())
     }
 
     @Test

@@ -19,7 +19,7 @@ class CoordinateMap2d(
         this.yRange = 0..coordinates.maxOf(Coordinate2d::y)
     }
 
-    fun createCoordinate(x: Int, y: Int) = Coordinate2d(x, y, this)
+    fun newCoordinate(x: Int, y: Int) = Coordinate2d(x, y, this)
 
     fun checkIfInBounds(coordinate2d: Coordinate2d): Boolean {
         return !((xRange != null && coordinate2d.x !in xRange!!) ||
@@ -52,6 +52,23 @@ class CoordinateMap2d(
     }
 
     companion object {
+        fun parse(input: List<String>, positiveChars: List<Char>) = positiveChars.map { it to parse(input, it) }
+        fun parse(input: String, positiveChars: List<Char>) = positiveChars.map { it to parse(input, it) }
+        fun parse(input: String, positiveChar: Char): List<Coordinate2d> = parse(input.split("\n").filter(String::isNotEmpty), positiveChar)
+        fun parse(input: List<String>, positiveChar: Char): List<Coordinate2d> {
+            val res = mutableListOf<Coordinate2d>()
+
+            val map = CoordinateMap2d(input[0].indices, input.indices)
+            for (y in map.yRange!!) {
+                for (x in map.xRange!!) {
+                    if (input[y][x] == positiveChar) {
+                        res.add(map.newCoordinate(x, y))
+                    }
+                }
+            }
+            return res
+        }
+
         fun List<Coordinate2d>.wrapAndFilterBoundaries(map: CoordinateMap2d) =
             this.mapNotNull { map.wrapAndFilterBoundaries(it) }
 
@@ -64,12 +81,18 @@ class CoordinateMap2d(
             //for (y in (minY..maxY)) print(y) TODO: Make numbers be printed vertically
 
             print('┎')
-            repeat((maxX - minX + 1)*2) { print('━') }
+            repeat((maxX - minX + 1) * 2) { print('━') }
             println()
             for (y in (minY..maxY)) {
                 print('│')
                 for (x in (minX..maxX)) {
-                    if (colored.contains(Coordinate2d(x,y))) print(ConsoleColors.GREEN+"▅"+ConsoleColors.RESET+"│")
+                    if (colored.contains(
+                            Coordinate2d(
+                                x,
+                                y
+                            )
+                        )
+                    ) print(ConsoleColors.GREEN + "▅" + ConsoleColors.RESET + "│")
                     else if (this.contains(Coordinate2d(x, y))) print("▅│")
                     else print(" │")
                 }
