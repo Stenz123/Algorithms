@@ -4,7 +4,7 @@ import dev.stenz.algorithms.coordinates.c2d.CoordinateMap2d
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
-class TestFlood {
+class TestFloodFill {
 
     @Test
     fun basicFloodFill() {
@@ -30,7 +30,7 @@ class TestFlood {
 
         var coords = CoordinateMap2d.parse(input, listOf('*', 'X')).map{ it.second }.flatten()
         var start = CoordinateMap2d.parse(input, 'X')[0]
-        assertEquals(151, Flood.basicFill(coords, start).size)
+        assertEquals(151, FloodFill.basicFill(coords, start).size)
 
         input = "---------------------------\n" +
                 "--------***********--------\n" +
@@ -61,7 +61,7 @@ class TestFlood {
 
         coords = CoordinateMap2d.parse(input, listOf('*', 'X')).map { it.second }.flatten()
         start = CoordinateMap2d.parse(input, 'X')[0]
-        assertEquals(261, Flood.basicFill(coords, start).size)
+        assertEquals(261, FloodFill.basicFill(coords, start).size)
     }
 
     @Test
@@ -88,7 +88,7 @@ class TestFlood {
 
         var coords = CoordinateMap2d.parse(input, listOf('*', 'X')).map{ it.second }.flatten()
         var start = CoordinateMap2d.parse(input, 'X')[0]
-        assertEquals(151, Flood.basicFill(coords, start, true).size)
+        assertEquals(151, FloodFill.basicFill(coords, start, true).size)
 
         input = "---------------------------\n" +
                 "--------***********--------\n" +
@@ -119,7 +119,67 @@ class TestFlood {
 
         coords = CoordinateMap2d.parse(input, listOf('*', 'X')).map { it.second }.flatten()
         start = CoordinateMap2d.parse(input, 'X')[0]
-        assertEquals(269, Flood.basicFill(coords, start, true).size)
+        assertEquals(269, FloodFill.basicFill(coords, start, true).size)
     }
+
+
+    //@Test
+    //fun rectangleFill() {
+    //    var input = "------------------------------------\n" +
+    //                "------------------------------------\n" +
+    //                "---------********************-------\n" +
+    //                "-------***------------------****----\n" +
+    //                "------**-----------------------***--\n" +
+    //                "----***--------------------------**-\n" +
+    //                "--***-----------------------------**\n" +
+    //                "-**--------------------------------*\n" +
+    //                "-**------------X-------------------*\n" +
+    //                "-*---------------------------------*\n" +
+    //                "-*-------------***-----------------*\n" +
+    //                "-*----------****--****--------------*\n" +
+    //                "--**--------*-------*--------------*\n" +
+    //                "----**------*********-----------***-\n" +
+    //                "-----****---------------------***---\n" +
+    //                "--------******-------------****-----\n" +
+    //                "-------------***************--------\n" +
+    //                "------------------------------------\n" +
+    //                "------------------------------------\n"
+//
+    //    var coords = HashSet(CoordinateMap2d.parse(input, listOf('*')).map{ it.second }.flatten())
+//
+//
+    //    var start = CoordinateMap2d.parse(input, 'X')[0]
+    //    FloodFill.basicFill(coords.toList(), start).toList().draw()
+    //    FloodFill.rectangleFill(coords, start).toList().draw()
+//
+    //    println()
+//
+    //    input = "-----------------------\n" +
+    //            "-----------------------\n" +
+    //            "-----------------------\n" +
+    //            "------**************---\n" +
+    //            "------*------------*---\n" +
+    //            "------*------------*---\n" +
+    //            "------*------------*---\n" +
+    //            "------*--X---------*---\n" +
+    //            "------*------------*---\n" +
+    //            "------*------------*---\n" +
+    //            "------*------------*---\n" +
+    //            "------**************---\n" +
+    //            "-----------------------\n" +
+    //            "-----------------------\n" +
+    //            "-----------------------\n" +
+    //            "-----------------------\n" +
+    //            "-----------------------\n" +
+    //            "-----------------------\n" +
+    //            "-----------------------\n"
+//
+    //    coords = HashSet(CoordinateMap2d.parse(input, listOf('*')).map{ it.second }.flatten())
+    //    start = CoordinateMap2d.parse(input, 'X')[0]
+    //    FloodFill.rectangleFill(coords, start).toList().draw()
+//
+    //    println()
+    //}
+
 
 }
