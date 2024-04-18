@@ -16,10 +16,20 @@ data class Coordinate2d(var x: Int, var y: Int, var map2d: CoordinateMap2d = Coo
     fun left() = Coordinate2d(x - 1, y)
     fun right() = Coordinate2d(x + 1, y)
 
+    fun moveTop(): Coordinate2d { y--; return this }
+    fun moveBottom(): Coordinate2d { y++; return this }
+    fun moveLeft(): Coordinate2d { x--; return this }
+    fun moveRight(): Coordinate2d { x++; return this }
+
     fun topRight() = Coordinate2d(x + 1, y - 1)
     fun bottomLeft() = Coordinate2d(x - 1, y + 1)
     fun topLeft() = Coordinate2d(x - 1, y - 1)
     fun bottomRight() = Coordinate2d(x + 1, y + 1)
+
+    fun moveTopRight(): Coordinate2d { x++; y--; return this }
+    fun moveBottomLeft(): Coordinate2d { x--; y++; return this }
+    fun moveTopLeft(): Coordinate2d { x--; y--; return this }
+    fun moveBottomRight(): Coordinate2d { x++; y++; return this }
 
     fun get8Neighbours(): List<Coordinate2d> = listOf(
         top(),
