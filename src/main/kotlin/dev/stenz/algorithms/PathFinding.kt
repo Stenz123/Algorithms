@@ -3,6 +3,17 @@ package dev.stenz.algorithms
 import java.util.PriorityQueue
 
 object PathFinding {
+    fun <T> reconstructPath(cameFrom: HashMap<T, T?>, start: T, end: T): List<T> {
+        val path = mutableListOf<T>()
+        var current = end
+        while (current != start) {
+            path.add(current)
+            current = cameFrom[current]!!
+        }
+        path.add(start)
+        return path.reversed()
+    }
+
     fun <T> djikstras(vertex: List<T>, start: T, end: T, getNextVertex: (T) -> List<T>) =
         djikstraWeighted(vertex.map { it to 1 }, start, end, getNextVertex)
 
@@ -37,14 +48,7 @@ object PathFinding {
                 }
             }
         }
-        val path = mutableListOf<T>()
-        var current = end
-        while (current != start) {
-            path.add(current)
-            current = prev[current]!!
-        }
-        path.add(start)
-        return path.reversed()
+        return reconstructPath(prev, start, end)
     }
 
 }
