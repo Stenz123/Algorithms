@@ -53,7 +53,7 @@ class CoordinateMap2d(
 
     companion object {
         fun parse(input: List<String>, positiveChars: List<Char>) = positiveChars.map { it to parse(input, it) }
-        fun parse(input: String, positiveChars: List<Char>) = positiveChars.map { it to parse(input, it) }
+        fun parse(input: String, positiveChars: List<Char>) = positiveChars.map {parse(input, it) }.flatten()
         fun parse(input: String, positiveChar: Char): List<Coordinate2d> = parse(input.split("\n").filter(String::isNotEmpty), positiveChar)
         fun parse(input: List<String>, positiveChar: Char): List<Coordinate2d> {
             val res = mutableListOf<Coordinate2d>()

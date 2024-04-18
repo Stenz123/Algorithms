@@ -28,7 +28,7 @@ class TestFlood {
                 "---**--------**----\n" +
                 "----**-------**----\n"
 
-        var coords = CoordinateMap2d.parse(input, listOf('*', 'X')).map{ it.second }.flatten()
+        var coords = CoordinateMap2d.parse(input, listOf('*', 'X'))
         var start = CoordinateMap2d.parse(input, 'X')[0]
         assertEquals(151, Flood.basicFill(coords, start).size)
 
@@ -59,7 +59,7 @@ class TestFlood {
                 "----------*****------------\n" +
                 "-------------X-------------\n"
 
-        coords = CoordinateMap2d.parse(input, listOf('*', 'X')).map { it.second }.flatten()
+        coords = CoordinateMap2d.parse(input, listOf('*', 'X'))
         start = CoordinateMap2d.parse(input, 'X')[0]
         assertEquals(261, Flood.basicFill(coords, start).size)
     }
@@ -86,7 +86,7 @@ class TestFlood {
                 "---**--------**----\n" +
                 "----**-------**----\n"
 
-        var coords = CoordinateMap2d.parse(input, listOf('*', 'X')).map{ it.second }.flatten()
+        var coords = CoordinateMap2d.parse(input, listOf('*', 'X'))
         var start = CoordinateMap2d.parse(input, 'X')[0]
         assertEquals(151, Flood.basicFill(coords, start, true).size)
 
@@ -117,7 +117,7 @@ class TestFlood {
                 "----------*****------------\n" +
                 "-------------X-------------\n"
 
-        coords = CoordinateMap2d.parse(input, listOf('*', 'X')).map { it.second }.flatten()
+        coords = CoordinateMap2d.parse(input, listOf('*', 'X'))
         start = CoordinateMap2d.parse(input, 'X')[0]
         assertEquals(269, Flood.basicFill(coords, start, true).size)
     }
